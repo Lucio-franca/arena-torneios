@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-bg text-slate-200 antialiased; }
+  input, select, textarea {
+    @apply bg-white/5 border border-white/10 rounded-lg px-3 py-2.5
+           text-slate-200 text-sm w-full focus:outline-none focus:border-teal
+           transition-colors placeholder-slate-600;
+  }
+  select option { background: #161b27; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-teal text-slate-900 font-bold py-3 px-6 rounded-xl text-sm
+           hover:bg-gold transition-colors disabled:opacity-40
+           disabled:cursor-not-allowed w-full;
+  }
+  .btn-secondary {
+    @apply bg-transparent border border-white/10 text-slate-400 py-2 px-4
+           rounded-lg text-xs hover:border-teal hover:text-teal
+           transition-colors cursor-pointer;
+  }
+  .card { @apply bg-bg-2 border border-white/10 rounded-xl p-5; }
+  .badge {
+    @apply inline-block text-xs font-semibold uppercase tracking-wider
+           px-3 py-1 rounded-full;
+  }
+  .badge-open      { @apply bg-green-500/10 text-green-400; }
+  .badge-full      { @apply bg-red-500/10 text-red-400; }
+  .badge-closed    { @apply bg-slate-500/10 text-slate-400; }
+  .badge-pending   { @apply bg-yellow-400/10 text-yellow-400; }
+  .badge-confirmed { @apply bg-green-500/10 text-green-400; }
+}
