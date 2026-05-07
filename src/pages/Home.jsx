@@ -41,7 +41,14 @@ function EventoCard({ evento, onClick }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <StatusBadge status={evento.status} inscritos={inscritos} limite={evento.limite} />
+      <div className="flex items-start justify-between gap-2">
+        <StatusBadge status={evento.status} inscritos={inscritos} limite={evento.limite} />
+        {evento.valor != null && (
+          <span className="text-teal font-bold text-sm whitespace-nowrap">
+            R$ {parseFloat(evento.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          </span>
+        )}
+      </div>
 
       <h3 className="text-white font-semibold text-base mt-2 mb-1">{evento.nome}</h3>
 
@@ -108,7 +115,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-bg">
-      {/* MODAL */}
       <AnimatePresence>
         {modalAdmin && (
           <motion.div
@@ -118,7 +124,6 @@ export default function Home() {
             exit={{ opacity: 0 }}
           >
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={fecharModal} />
-
             <motion.div
               className="relative w-full max-w-sm rounded-2xl p-6 shadow-2xl"
               style={{ background: 'rgba(22,27,39,0.98)', border: '1px solid rgba(255,255,255,0.1)' }}
@@ -128,7 +133,6 @@ export default function Home() {
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             >
               <h2 className="text-white text-lg font-semibold mb-4 text-center">Área do Admin</h2>
-
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="email"
@@ -144,14 +148,11 @@ export default function Home() {
                   placeholder="Senha"
                   required
                 />
-
                 {erro && <p className="text-red-400 text-sm">{erro}</p>}
-
                 <motion.button whileTap={{ scale: 0.97 }} className="btn-primary w-full">
                   {loadingLogin ? 'Entrando...' : 'Entrar'}
                 </motion.button>
               </form>
-
               <button onClick={fecharModal} className="text-xs text-slate-500 mt-4 w-full">
                 Fechar
               </button>
@@ -160,7 +161,6 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* NAV */}
       <nav className="bg-bg-2 border-b border-white/10 px-6 py-4 flex justify-between items-center">
         <span className="text-teal font-bold">🏐 Arena Torneios</span>
         <motion.button onClick={() => setModalAdmin(true)} whileTap={{ scale: 0.95 }} className="btn-secondary">
@@ -168,13 +168,11 @@ export default function Home() {
         </motion.button>
       </nav>
 
-      {/* HERO */}
       <div className="bg-bg-2 border-b border-white/10 px-6 py-10 text-center">
         <h1 className="text-3xl font-bold text-white">Escolha seu torneio</h1>
         <p className="text-slate-400 text-sm">Garanta sua vaga no próximo evento</p>
       </div>
 
-      {/* LISTA */}
       <div className="px-6 py-6 max-w-5xl mx-auto">
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
